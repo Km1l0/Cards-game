@@ -5,11 +5,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import com.example.demo1.models.Card;
 import com.example.demo1.view.alert.AlertBoxInterface;
 import com.example.demo1.view.alert.AlertBox;
+
+import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
 
 public class GameController {
 
@@ -73,23 +78,57 @@ public class GameController {
         System.out.println(selectedCardModel.toString());
 
     }
+    private int numCartaJugada = 0;
+    private int nonValidCard = 0;
+
 
     // Método para mover la carta seleccionada al deck después de presionar el botón
     @FXML
     void onHandleShowButton(ActionEvent event) {
+        // Si ya se ha jugado una carta, no permitir jugar más
+        if (numCartaJugada > 0) {
+            // Mostrar alerta indicando que solo se puede jugar una carta
+            AlertBox alertBox = new AlertBox();
+            alertBox.showAlert(
+                    "Límite de Cartas",
+                    "Solo puedes jugar una carta",
+                    "Ya has jugado una carta, no puedes jugar más.",
+                    Alert.AlertType.WARNING
+            );
+            return; // Salir del método sin realizar cambios
+        }
+
         if (selectedCard != null && selectedCardModel != null) {
             // Calcula el nuevo total para verificar
             int newTotalValue = totalValue + selectedCardModel.getValue();
 
             if (newTotalValue > 50) {
-                // Mostrar una alerta usando AlertBox
+                // Incrementar el contador de intentos fallidos
+                nonValidCard++;
+
+                // Mostrar alerta de que se excedió el límite y cuántos intentos restantes
                 AlertBox alertBox = new AlertBox();
                 alertBox.showAlert(
                         "Límite Excedido",
                         "No se puede agregar la carta",
-                        "El total de las cartas no puede exceder 50. Intente otra carta.",
+                        "El total de las cartas no puede exceder 50. Intentos restantes: " + (4 - nonValidCard),
                         Alert.AlertType.WARNING
                 );
+
+                // Si se alcanzaron 4 intentos fallidos, mostrar mensaje de "fuera"
+                if (nonValidCard >= 4) {
+                    alertBox.showAlert(
+                            "Juego Terminado",
+                            "Has quedado fuera del juego",
+                            "No tienes cartas válidas. ¡Intenta otra vez!",
+                            Alert.AlertType.ERROR
+                    );
+
+                    // Aquí podrías agregar cualquier lógica adicional para finalizar el juego
+                    // como deshabilitar botones o bloquear más intentos
+
+                }
+
                 return; // Salir del método sin realizar cambios
             }
 
@@ -102,6 +141,9 @@ public class GameController {
             // Actualizar el total del valor
             totalValue = newTotalValue;
             currentValue.setText(String.valueOf(totalValue));
+
+            // Incrementar el contador de cartas jugadas
+            numCartaJugada++;
 
             // Resetear la selección
             selectedCard = null;
@@ -118,12 +160,68 @@ public class GameController {
         }
     }
 
+
     // Métodos para manejar botones adicionales
     @FXML
     void onHandleInstructionsButton(ActionEvent event) {
         // Agrega la lógica para el botón de instrucciones
     }
 
+    private Set<Integer> drawnNumbers = new HashSet<>();
+
+    @FXML
+    void DrawToHand(MouseEvent event) {
+        try {
+            int randomNumber;
+
+            // Generar un número aleatorio entre 1 y 54 que no se haya generado antes
+            do {
+                randomNumber = (int) (Math.random() * 54) + 1;
+            } while (drawnNumbers.contains(randomNumber));  // Si el número ya fue generado, generar uno nuevo
+
+            // Agregar el número generado al conjunto de números ya obtenidos
+            drawnNumbers.add(randomNumber);
+
+            // Crear la ruta de la imagen basada en el número generado
+            URL resourceUrl = getClass().getResource("/com/example/images/" + randomNumber + ".png");
+
+            if (resourceUrl == null) {
+                throw new IllegalArgumentException("No se pudo encontrar la imagen: " + randomNumber + ".png");
+            }
+
+            String imagePath = resourceUrl.toExternalForm();
+            Image newCardImage = new Image(imagePath);
+
+            // Buscar el primer ImageView disponible (que tenga valor null)
+            if (card1.getImage() == null) {
+                card1.setImage(newCardImage);
+            } else if (card2.getImage() == null) {
+                card2.setImage(newCardImage);
+            } else if (card3.getImage() == null) {
+                card3.setImage(newCardImage);
+            } else if (card4.getImage() == null) {
+                card4.setImage(newCardImage);
+            } else {
+                // Si todos los ImageView están ocupados, mostrar una alerta
+                AlertBox alertBox = new AlertBox();
+                alertBox.showAlert(
+                        "Mano Llena",
+                        "No hay espacio disponible",
+                        "Por favor juega una carta antes de robar otra.",
+                        Alert.AlertType.WARNING
+                );
+            }
+
+            // Restablecer el contador de cartas jugadas a 0 después de robar una carta
+            numCartaJugada = 0;
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error inesperado: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
     // Enlazamos los eventos de clic a cada carta en la vista (esto puede hacerse también en el FXML)
     @FXML
     public void initialize() {
