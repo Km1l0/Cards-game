@@ -6,13 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
+
 public class GameController {
-
-    @FXML
-    private Button instructionsButton;
-
-    @FXML
-    private Button showButton;
 
     @FXML
     private ImageView card1;
@@ -27,22 +22,28 @@ public class GameController {
     private ImageView card4;
 
     @FXML
+    private Label currentValue;
+
+    @FXML
     private ImageView deck;
 
     @FXML
     private ImageView hand;
 
     @FXML
-    private Label currentValue;
+    private Button instructionsButton;
+
+    @FXML
+    private Button showButton;
 
     @FXML
     void onHandleInstructionsButton(ActionEvent event) {
-        // Agrega la lógica para el botón de instrucciones
+
     }
 
     @FXML
     void onHandleShowButton(ActionEvent event) {
-        // Agrega la lógica para el botón de mostrar
+
     }
 
 }

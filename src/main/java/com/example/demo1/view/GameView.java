@@ -4,58 +4,32 @@ import com.example.demo1.controllers.GameController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class GameView extends Stage {
 
-    private GameController gameController; // Game controller
+        private GameController gameController;
 
-    public GameView() throws IOException {
-        // Load the FXML file using FXMLLoader
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/com/example/Cards-game/game-view.fxml")
-        );
-        Parent root = loader.load(); // Load the root element from the FXML file
-
-        // Get the associated controller from the FXMLLoader
-        this.gameController = loader.getController();
-
-        // Set the window title
-        this.setTitle("Batalla Naval");
-
-        // Create the scene with the loaded root element
-        Scene scene = new Scene(root);
-
-        // Set the window icon
-        this.getIcons().add(new Image(
-                getClass().getResourceAsStream("/com/example/Cards-game/images/portada.png")
-        ));
-
-        // Set the scene for this stage
-        this.setScene(scene);
-
-        // Display the window
-        this.show();
-    }
-
-    public GameController getGameController() {
-        return this.gameController;
-    }
-
-    public static GameView getInstance() throws IOException {
-        if (GameViewHolder.INSTANCE == null) {
-            // Create a new instance if it does not exist
-            return GameViewHolder.INSTANCE = new GameView();
-        } else {
-            // Return the existing instance
-            return GameViewHolder.INSTANCE;
+        public GameView() throws IOException {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/game-view.fxml"));
+            Parent root = loader.load();
+            this.gameController = loader.getController();
+            this.setTitle("Craps Game");
+            Scene scene = new Scene(root);
+            this.setScene(scene);
+            this.show();
         }
-    }
 
-    private static class GameViewHolder {
-        private static GameView INSTANCE; // Singleton instance of GameView
-    }
-}
+        public GameController getGameController() {
+            return this.gameController;
+        }
+
+        public static GameView getInstance() throws IOException {
+            return GameViewHolder.INSTANCE = new GameView();
+        }
+
+        private static class GameViewHolder {
+            private static GameView INSTANCE;
+        }}

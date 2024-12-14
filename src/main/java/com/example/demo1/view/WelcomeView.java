@@ -1,33 +1,37 @@
 package com.example.demo1.view;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
-public class WelcomeView {
+import java.io.IOException;
 
-    private static WelcomeView instance;
-    private ImageView imageView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
-    private WelcomeView() {
+import java.io.IOException;
 
-        try {
+public class WelcomeView extends Stage {
 
-            Image image = new Image(getClass().getResourceAsStream("/com/example/images/portada.png"));
-            imageView = new ImageView(image);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error al cargar la imagen.");
-        }
+    public WelcomeView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/welcome-view.fxml"));
+        Parent root = loader.load();
+        this.setTitle("Cincuentazo");
+        Scene scene = new Scene(root);
+        this.setScene(scene);
+        this.show();
     }
 
-    public static WelcomeView getInstance() {
-        if (instance == null) {
-            instance = new WelcomeView();
-        }
-        return instance;
+    public static WelcomeView getInstance() throws IOException {
+        return WelcomeViewHolder.INSTANCE = new WelcomeView();
     }
 
-    public ImageView getImageView() {
-        return imageView;
+    private static class WelcomeViewHolder {
+        private static WelcomeView INSTANCE;
     }
 }
