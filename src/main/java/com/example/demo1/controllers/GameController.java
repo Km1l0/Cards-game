@@ -2,11 +2,14 @@ package com.example.demo1.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import com.example.demo1.models.Card;  // Importamos la clase Card
+import com.example.demo1.models.Card;
+import com.example.demo1.view.alert.AlertBoxInterface;
+import com.example.demo1.view.alert.AlertBox;
 
 public class GameController {
 
@@ -38,6 +41,7 @@ public class GameController {
     private Button showButton;
 
     private ImageView selectedCard = null; // Para almacenar la carta seleccionada
+    private Card selectedCardModel = null; // Para almacenar el modelo de la carta seleccionada
 
     private int totalValue = 0;  // Variable para almacenar el total de los valores
 
@@ -63,35 +67,61 @@ public class GameController {
         String cardName = cardImage.substring(cardImage.lastIndexOf("/") + 1);
 
         // Crear una instancia de la clase Card con la imagen y el valor
-        Card card = new Card(cardName);  // Al crearla, automáticamente se asigna el valor correcto
+        selectedCardModel = new Card(cardName);  // Al crearla, automáticamente se asigna el valor correcto
 
         // Imprimir la carta seleccionada en la terminal
-        System.out.println(card.toString());
+        System.out.println(selectedCardModel.toString());
 
-        // Actualizar el valor en el Label (esto mostrará el valor de la carta en la interfaz)
     }
 
-    // Método para manejar el botón de mostrar, sumando el valor de la carta seleccionada
+    // Método para mover la carta seleccionada al deck después de presionar el botón
     @FXML
     void onHandleShowButton(ActionEvent event) {
-        if (selectedCard != null) {
-            // Obtener el valor de la carta seleccionada
-            String cardImage = selectedCard.getImage().getUrl();
-            String cardName = cardImage.substring(cardImage.lastIndexOf("/") + 1);
-            Card selectedCardObj = new Card(cardName);
+        if (selectedCard != null && selectedCardModel != null) {
+            // Calcula el nuevo total para verificar
+            int newTotalValue = totalValue + selectedCardModel.getValue();
 
-            // Sumar el valor de la carta seleccionada al total
-            totalValue += selectedCardObj.getValue();
+            if (newTotalValue > 50) {
+                // Mostrar una alerta usando AlertBox
+                AlertBox alertBox = new AlertBox();
+                alertBox.showAlert(
+                        "Límite Excedido",
+                        "No se puede agregar la carta",
+                        "El total de las cartas no puede exceder 50. Intente otra carta.",
+                        Alert.AlertType.WARNING
+                );
+                return; // Salir del método sin realizar cambios
+            }
 
-            // Actualizar el valor total en el Label
-            currentValue.setText(":" + totalValue);
+            // Mover la carta seleccionada al deck
+            deck.setImage(selectedCard.getImage());
+
+            // Eliminar la imagen de la carta seleccionada del ImageView original
+            selectedCard.setImage(null);
+
+            // Actualizar el total del valor
+            totalValue = newTotalValue;
+            currentValue.setText(String.valueOf(totalValue));
+
+            // Resetear la selección
+            selectedCard = null;
+            selectedCardModel = null;
+        } else {
+            // Si no hay carta seleccionada, mostramos una alerta
+            AlertBox alertBox = new AlertBox();
+            alertBox.showAlert(
+                    "Sin Selección",
+                    "No hay carta seleccionada",
+                    "Seleccione una carta antes de intentar moverla.",
+                    Alert.AlertType.INFORMATION
+            );
         }
     }
 
-    // Métodos para manejar botones (instrucciones, mostrar, etc. - de momento vacíos)
+    // Métodos para manejar botones adicionales
     @FXML
     void onHandleInstructionsButton(ActionEvent event) {
-        // Lógica para el botón de instrucciones
+        // Agrega la lógica para el botón de instrucciones
     }
 
     // Enlazamos los eventos de clic a cada carta en la vista (esto puede hacerse también en el FXML)

@@ -18,6 +18,7 @@ public class Card {
     private static final Set<String> VALUE_8_CARDS = new HashSet<>();
     private static final Set<String> VALUE_0_CARDS = new HashSet<>();
     private static final Set<String> VALUE_10_CARDS = new HashSet<>();
+    private static final Set<String> VALUE_M10_CARDS = new HashSet<>();
 
     static {
         // Cartas con valor 2
@@ -73,6 +74,20 @@ public class Card {
         VALUE_10_CARDS.add("23.png");
         VALUE_10_CARDS.add("36.png");
         VALUE_10_CARDS.add("49.png");
+
+
+        VALUE_M10_CARDS.add("11.png");
+        VALUE_M10_CARDS.add("22.png");
+        VALUE_M10_CARDS.add("33.png");
+        VALUE_M10_CARDS.add("24.png");
+        VALUE_M10_CARDS.add("25.png");
+        VALUE_M10_CARDS.add("26.png");
+        VALUE_M10_CARDS.add("37.png");
+        VALUE_M10_CARDS.add("38.png");
+        VALUE_M10_CARDS.add("39.png");
+        VALUE_M10_CARDS.add("50.png");
+        VALUE_M10_CARDS.add("51.png");
+        VALUE_M10_CARDS.add("52.png");
     }
 
     // Constructor
@@ -101,7 +116,10 @@ public class Card {
             return 0;  // Valor 0 para las cartas 9, 22, 35 y 48
         } else if (VALUE_10_CARDS.contains(imageName)) {
             return 10;  // Valor 10 para las cartas 10, 23, 36 y 49
-        }
+        } else if (VALUE_M10_CARDS.contains(imageName)) {
+        return -10;
+    }
+
         return 0;  // Valor predeterminado si no está en ninguna de las listas
     }
 
