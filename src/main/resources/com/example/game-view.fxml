@@ -26,28 +26,28 @@
          <children>
             <ImageView fx:id="card1" fitHeight="188.0" fitWidth="161.0" onMouseClicked="#onCardClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/3.png" />
+                  <Image url="@images/50.png" />
                </image>
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin></ImageView>
             <ImageView fx:id="card2" fitHeight="188.0" fitWidth="161.0" onMouseClicked="#onCardClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/17.png" />
+                  <Image url="@images/28.png" />
                </image>
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin></ImageView>
             <ImageView fx:id="card3" fitHeight="188.0" fitWidth="161.0" onMouseClicked="#onCardClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/19.png" />
+                  <Image url="@images/52.png" />
                </image>
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin></ImageView>
             <ImageView fx:id="card4" fitHeight="188.0" fitWidth="161.0" onMouseClicked="#onCardClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/22.png" />
+                  <Image url="@images/3.png" />
                </image>
                <HBox.margin>
                   <Insets right="5.0" />
