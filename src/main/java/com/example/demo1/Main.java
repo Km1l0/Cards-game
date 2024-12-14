@@ -4,6 +4,8 @@ import com.example.demo1.view.WelcomeView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Main extends Application {
 
     public static void main(String[] args) {
@@ -11,7 +13,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         // No es necesario capturar IOException aquí ya que no se lanza
         WelcomeView.getInstance(); // Obtiene la instancia de WelcomeView
     }
