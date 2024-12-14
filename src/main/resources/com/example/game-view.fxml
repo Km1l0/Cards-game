@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -9,39 +10,52 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1303.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.controllers.GameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1202.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.controllers.GameController">
    <children>
-      <Button fx:id="instructionsButton" layoutX="-3.0" mnemonicParsing="false" onAction="#onHandleInstructionsButton" prefHeight="30.0" prefWidth="1310.0" style="-fx-background-color: #6c3b2a; -fx-border-color: black;" text="INSTRUCTIONS(?)" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" underline="true">
+      <Button fx:id="instructionsButton" layoutX="-3.0" mnemonicParsing="false" onAction="#onHandleInstructionsButton" prefHeight="30.0" prefWidth="1212.0" style="-fx-background-color: #6c3b2a; -fx-border-color: black;" text="INSTRUCTIONS(?)" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" underline="true">
          <font>
             <Font name="Cambria Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="showButton" layoutX="934.0" layoutY="652.0" mnemonicParsing="false" onAction="#onHandleShowButton" prefHeight="78.0" prefWidth="167.0" style="-fx-background-color: ORANGE;" text="SET">
+      <Button fx:id="showButton" layoutX="885.0" layoutY="620.0" mnemonicParsing="false" onAction="#onHandleShowButton" prefHeight="78.0" prefWidth="167.0" style="-fx-background-color: ORANGE;" text="SET">
          <font>
             <Font name="Cambria Bold" size="14.0" />
          </font>
       </Button>
-      <HBox layoutX="332.0" layoutY="600.0" prefHeight="181.0" prefWidth="542.0">
+      <HBox layoutX="257.0" layoutY="565.0" prefHeight="181.0" prefWidth="542.0">
          <children>
-            <ImageView fx:id="card1" fitHeight="179.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="card1" fitHeight="188.0" fitWidth="161.0" onMouseClicked="#onCardClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/1.png" />
-               </image></ImageView>
-            <ImageView fx:id="card2" fitHeight="179.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
+               </image>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin></ImageView>
+            <ImageView fx:id="card2" fitHeight="188.0" fitWidth="161.0" onMouseClicked="#onCardClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/2.png" />
-               </image></ImageView>
-            <ImageView fx:id="card3" fitHeight="179.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
+               </image>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin></ImageView>
+            <ImageView fx:id="card3" fitHeight="188.0" fitWidth="161.0" onMouseClicked="#onCardClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/4.png" />
-               </image></ImageView>
-            <ImageView fx:id="card4" fitHeight="179.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
+               </image>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin></ImageView>
+            <ImageView fx:id="card4" fitHeight="188.0" fitWidth="161.0" onMouseClicked="#onCardClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/26.png" />
-               </image></ImageView>
+               </image>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </ImageView>
          </children>
       </HBox>
-      <VBox layoutX="440.0" layoutY="209.0" prefHeight="214.0" prefWidth="174.0">
+      <VBox layoutX="340.0" layoutY="209.0" prefHeight="214.0" prefWidth="174.0">
          <children>
             <ImageView fx:id="deck" fitHeight="226.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -49,7 +63,7 @@
                </image></ImageView>
          </children></VBox>
       <Label layoutX="498.0" layoutY="91.0" text="SUMA ACTUAL:" />
-      <VBox layoutX="668.0" layoutY="209.0" prefHeight="214.0" prefWidth="174.0">
+      <VBox layoutX="599.0" layoutY="209.0" prefHeight="214.0" prefWidth="174.0">
          <children>
             <ImageView fx:id="hand" fitHeight="226.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true">
                <image>

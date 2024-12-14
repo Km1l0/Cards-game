@@ -13,8 +13,11 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        // No es necesario capturar IOException aquí ya que no se lanza
-        WelcomeView.getInstance(); // Obtiene la instancia de WelcomeView
+    public void start(Stage primaryStage) {
+        try {
+            WelcomeView.getInstance(); // Gets the instance of WelcomeView
+        } catch (IOException e) {
+            e.printStackTrace(); // Muestra el error en caso de fallo
+        }
     }
 }
