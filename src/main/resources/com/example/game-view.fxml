@@ -26,28 +26,28 @@
          <children>
             <ImageView fx:id="card1" fitHeight="188.0" fitWidth="161.0" onMouseClicked="#onCardClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/50.png" />
+                  <Image url="@images/3.png" />
                </image>
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin></ImageView>
             <ImageView fx:id="card2" fitHeight="188.0" fitWidth="161.0" onMouseClicked="#onCardClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/28.png" />
+                  <Image url="@images/29.png" />
                </image>
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin></ImageView>
             <ImageView fx:id="card3" fitHeight="188.0" fitWidth="161.0" onMouseClicked="#onCardClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/52.png" />
+                  <Image url="@images/42.png" />
                </image>
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin></ImageView>
             <ImageView fx:id="card4" fitHeight="188.0" fitWidth="161.0" onMouseClicked="#onCardClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/3.png" />
+                  <Image url="@images/16.png" />
                </image>
                <HBox.margin>
                   <Insets right="5.0" />
@@ -99,5 +99,7 @@
             </ImageView>
          </children>
       </VBox>
+      <Label fx:id="turn1" alignment="CENTER" layoutX="885.0" layoutY="76.0" prefHeight="54.0" prefWidth="121.0" text="valor carta" textAlignment="CENTER" />
+      <Label fx:id="cartaenemigo" alignment="CENTER" layoutX="1024.0" layoutY="83.0" prefHeight="54.0" prefWidth="121.0" text="0" textAlignment="CENTER" />
    </children>
 </Pane>

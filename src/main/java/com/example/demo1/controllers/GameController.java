@@ -37,6 +37,9 @@ public class GameController {
     private Label turn;
 
     @FXML
+    private Label cartaenemigo;
+
+    @FXML
     private ImageView deck;
 
     @FXML
@@ -62,10 +65,36 @@ public class GameController {
         machine.onMachinePlayCard();
     }
 
-    public void updateTotalValue(int value) {
-        totalValue += value; // Suma o resta el valor a totalValue
-        int newTotalValue = totalValue;  // Se usa totalValue ya que es la suma acumulada
-        currentValue.setText(String.valueOf(newTotalValue)); // Imprime el nuevo total para depuración
+    public void updateTotalValue(int cardValue) {
+        try {
+            // Calcular el nuevo total con la carta seleccionada
+            int newTotalValue = totalValue + cardValue;
+
+            // Verificar si el nuevo total excede el límite
+            if (newTotalValue > 50) {
+
+                // Mostrar alerta si el total excede 50
+                AlertBox alertBox = new AlertBox();
+                alertBox.showAlert(
+                        "Ha ganado el humano",
+                        "Victoria!",
+                        "La máquina no tiene cartas que no superen 50",
+                        Alert.AlertType.WARNING
+                );
+                return; // Si excede el límite, no actualizamos el total
+            }
+
+            // Si no excede el límite, actualizamos el total
+            totalValue = newTotalValue;
+
+            // Actualizar el Label con el nuevo total
+            currentValue.setText(String.valueOf(totalValue));
+            turnNumber++;
+            turn.setText(String.valueOf(turnNumber));
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace(); // Manejar error en caso de que el valor no sea un número válido
+        }
     }
 
     public void updateDeck(Image newCardImage) {

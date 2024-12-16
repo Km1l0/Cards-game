@@ -23,8 +23,6 @@ public class Machine implements Runnable {
         this.machineHand = new ArrayList<>(); // Inicializamos la mano de la máquina
 
         // Iniciamos la mano de la máquina con una carta específica, por ejemplo, "2.png"
-        Card initialCard = new Card("2.png"); // Nombre de la carta y su valor
-        machineHand.add(initialCard); // Agregarla a la mano de la máquina
     }
 
     // Método para agregar una carta a la mano de la máquina
@@ -40,7 +38,7 @@ public class Machine implements Runnable {
 
             // Obtener un número aleatorio hasta que sea uno no repetido
             do {
-                randomNumber = (int) (Math.random() * 54) + 1;
+                randomNumber = (int) (Math.random() * 52) ;
             } while (drawnNumbers.contains(randomNumber));
 
             drawnNumbers.add(randomNumber);
@@ -48,12 +46,14 @@ public class Machine implements Runnable {
             // Determinar el valor de la carta basado en las listas de Card
             String cardName = randomNumber + ".png";
             int cardValue = getCardValue(cardName);
+            System.out.println("CONTENIDO JUSTO DESPUES DE INT CARD VALUE, ESTA ES LA CARTA RANDOM QUE DA: " + randomNumber +".png" );
+            System.out.println("CONTENIDO JUSTO DESPUES DE INT CARD VALUE, ESTE ES EL VALOR DE LA CARTA DE ARRIBA: " + cardValue);
 
             // Crear la carta con su nombre y valor
             Card newCard = new Card(cardName); // Usamos el nombre real de la carta
             machineHand.add(newCard);
+            System.out.println("ESTA ES LA CARTA QUE SE INGRESA CON EL CARDNAME ANTERIORMENTE OBTENIDO: " + newCard);
             // Agregar la carta a la mano de la máquina
-            addCardToMachineHand(newCard);
 
             // Cargar la imagen correspondiente a la carta obtenida
             URL resourceUrl = getClass().getResource("/com/example/images/" + cardName);
@@ -72,39 +72,58 @@ public class Machine implements Runnable {
             // Aquí la invocamos para obtener una carta adicional.
 
             // Aumenta el turno
+            onMachinePlayCard();
+            machineHand.clear();
             turnNumber++;
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     // Método para obtener el valor de la carta basándose en su nombre
-    private int getCardValue(String cardName) {
-        if (Card.VALUE_2_CARDS.contains(cardName)) {
-            return 2;
-        } else if (Card.VALUE_3_CARDS.contains(cardName)) {
-            return 3;
-        } else if (Card.VALUE_4_CARDS.contains(cardName)) {
-            return 4;
-        } else if (Card.VALUE_5_CARDS.contains(cardName)) {
-            return 5;
-        } else if (Card.VALUE_6_CARDS.contains(cardName)) {
-            return 6;
-        } else if (Card.VALUE_7_CARDS.contains(cardName)) {
-            return 7;
-        } else if (Card.VALUE_8_CARDS.contains(cardName)) {
-            return 8;
-        } else if (Card.VALUE_0_CARDS.contains(cardName)) {
-            return 0;
-        } else if (Card.VALUE_10_CARDS.contains(cardName)) {
-            return 10;
-        } else if (Card.VALUE_M10_CARDS.contains(cardName)) {
+    int getCardValue(String cardName) {
+        if (cardName.equals("11.png") || cardName.equals("12.png") || cardName.equals("13.png") ||
+                cardName.equals("24.png") || cardName.equals("25.png") || cardName.equals("26.png") ||
+                cardName.equals("37.png") || cardName.equals("38.png") || cardName.equals("39.png") ||
+                cardName.equals("50.png") || cardName.equals("51.png") || cardName.equals("52.png")) {
             return -10;
+        } else if (cardName.equals("2.png") || cardName.equals("15.png") ||
+                cardName.equals("28.png") || cardName.equals("41.png")) {
+            return 2;
+        } else if (cardName.equals("1.png") || cardName.equals("14.png") ||
+                cardName.equals("27.png") || cardName.equals("40.png")) {
+            return 1;
+
+        } else if (cardName.equals("3.png") || cardName.equals("16.png") ||
+                cardName.equals("29.png") || cardName.equals("42.png")) {
+            return 3;
+        } else if (cardName.equals("4.png") || cardName.equals("17.png") ||
+                cardName.equals("30.png") || cardName.equals("43.png")) {
+            return 4;
+        } else if (cardName.equals("5.png") || cardName.equals("18.png") ||
+                cardName.equals("31.png") || cardName.equals("44.png")) {
+            return 5;
+        } else if (cardName.equals("6.png") || cardName.equals("19.png") ||
+                cardName.equals("32.png") || cardName.equals("45.png")) {
+            return 6;
+        } else if (cardName.equals("7.png") || cardName.equals("20.png") ||
+                cardName.equals("33.png") || cardName.equals("46.png")) {
+            return 7;
+        } else if (cardName.equals("8.png") || cardName.equals("21.png") ||
+                cardName.equals("34.png") || cardName.equals("47.png")) {
+            return 8;
+        } else if (cardName.equals("9.png") || cardName.equals("22.png") ||
+                cardName.equals("35.png") || cardName.equals("48.png")) {
+            return 0;
+        } else if (cardName.equals("10.png") || cardName.equals("23.png") ||
+                cardName.equals("36.png") || cardName.equals("49.png")) {
+            return 10;
         }
 
-        // Si no se encuentra el valor, retornar un valor predeterminado (podrías lanzar una excepción si lo prefieres)
-        return 0;
-    }
 
+
+
+        return 0; // Si no se encuentra, retornamos valor por defecto
+    }
     @Override
     public void run() {
         while (true) {
@@ -114,7 +133,6 @@ public class Machine implements Runnable {
 
                 // La máquina juega su carta
                 onMachinePlayCard();
-                getNewCardForMachine();  // Llamamos al método nuevamente para obtener una nueva carta.
 
 
             } catch (InterruptedException e) {
@@ -126,15 +144,7 @@ public class Machine implements Runnable {
     // Método que coloca la única carta de la mano de la máquina en el deck
     public void onMachinePlayCard() {
         if (machineHand.isEmpty()) {
-            // En caso de que la máquina no tenga ninguna carta (aunque no debería ocurrir)
-            AlertBox alertBox = new AlertBox();
-            alertBox.showAlert(
-                    "Sin Cartas",
-                    "La máquina no tiene cartas",
-                    "La máquina no tiene cartas para jugar.",
-                    Alert.AlertType.WARNING
-            );
-            return;
+            getNewCardForMachine();
         }
 
         // Obtener la única carta de la mano de la máquina
@@ -145,11 +155,10 @@ public class Machine implements Runnable {
         gameController.updateDeck(cardImage); // Coloca la carta en el ImageView deckmesa
 
         // Limpiar la mano de la máquina
-        machineHand.clear();
-
         // Aumentar el turno
         turnNumber++;
-        getNewCardForMachine();
-        gameController.updateTotalValue(getCardValue(machineCard.getName()));
+        System.out.println("ESTE ES EL ASIGNADO FINAL EN MACHINE CARD: " + machineCard.getValue());
+        gameController.updateTotalValue(machineCard.getValue());
+
     }
 }
