@@ -99,29 +99,76 @@ public class Card {
 
     // Método para determinar el valor de la carta en función del nombre de la imagen
     private int determineCardValue(String imageName) {
-        if (imageName.equals("11.png") || imageName.equals("12.png") || imageName.equals("13.png")) {
-            return -10;
-        } else if (imageName.equals("2.png") || imageName.equals("15.png") || imageName.equals("28.png") || imageName.equals("41.png")) {
-            return 2;
-        } else if (imageName.equals("3.png") || imageName.equals("16.png") || imageName.equals("29.png") || imageName.equals("42.png")) {
-            return 3;
-        } else if (imageName.equals("4.png") || imageName.equals("17.png") || imageName.equals("30.png") || imageName.equals("43.png")) {
-            return 4;
-        } else if (imageName.equals("5.png") || imageName.equals("18.png") || imageName.equals("31.png") || imageName.equals("44.png")) {
-            return 5;
-        } else if (imageName.equals("6.png") || imageName.equals("19.png") || imageName.equals("32.png") || imageName.equals("45.png")) {
-            return 6;
-        } else if (imageName.equals("7.png") || imageName.equals("20.png") || imageName.equals("33.png") || imageName.equals("46.png")) {
-            return 7;
-        } else if (imageName.equals("8.png") || imageName.equals("21.png") || imageName.equals("34.png") || imageName.equals("47.png")) {
-            return 8;
-        } else if (imageName.equals("9.png") || imageName.equals("22.png") || imageName.equals("35.png") || imageName.equals("48.png")) {
-            return 0;
-        } else if (imageName.equals("10.png") || imageName.equals("23.png") || imageName.equals("36.png") || imageName.equals("49.png")) {
-            return 10;
+        switch (imageName) {
+            case "11.png":
+            case "12.png":
+            case "13.png":
+            case "24.png":
+            case "25.png":
+            case "26.png":
+            case "37.png":
+            case "38.png":
+            case "39.png":
+            case "50.png":
+            case "51.png":
+            case "52.png":
+                return -10;
+            case "2.png":
+            case "15.png":
+            case "28.png":
+            case "41.png":
+                return 2;
+            case "1.png":
+            case "14.png":
+            case "27.png":
+            case "40.png":
+                return 1;
+            case "3.png":
+            case "16.png":
+            case "29.png":
+            case "42.png":
+                return 3;
+            case "4.png":
+            case "17.png":
+            case "30.png":
+            case "43.png":
+                return 4;
+            case "5.png":
+            case "18.png":
+            case "31.png":
+            case "44.png":
+                return 5;
+            case "6.png":
+            case "19.png":
+            case "32.png":
+            case "45.png":
+                return 6;
+            case "7.png":
+            case "20.png":
+            case "33.png":
+            case "46.png":
+                return 7;
+            case "8.png":
+            case "21.png":
+            case "34.png":
+            case "47.png":
+                return 8;
+            case "9.png":
+            case "22.png":
+            case "35.png":
+            case "48.png":
+                return 0;
+            case "10.png":
+            case "23.png":
+            case "36.png":
+            case "49.png":
+                return 10;
+            default:
+                // Handle invalid image names
+                return 0;
         }
-        return 0; // Si no se encuentra, retornamos valor por defecto
     }
+
 
     // Método para determinar el palo de la carta en función del nombre de la imagen
     private String determineCardSuit(String imageName) {
