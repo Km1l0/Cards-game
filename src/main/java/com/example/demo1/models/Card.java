@@ -7,18 +7,19 @@ public class Card {
 
     private String imageName;  // Nombre del archivo de la imagen de la carta
     private int value;         // Valor de la carta (por ejemplo, 2, 3, 4, 5, 6, 7, 8, 0, 10)
+    private String suit;       // Palo de la carta (Pica, Corazón, Diamante, Trebol)
 
     // Listas de cartas que tienen un valor específico
-    private static final Set<String> VALUE_2_CARDS = new HashSet<>();
-    private static final Set<String> VALUE_3_CARDS = new HashSet<>();
-    private static final Set<String> VALUE_4_CARDS = new HashSet<>();
-    private static final Set<String> VALUE_5_CARDS = new HashSet<>();
-    private static final Set<String> VALUE_6_CARDS = new HashSet<>();
-    private static final Set<String> VALUE_7_CARDS = new HashSet<>();
-    private static final Set<String> VALUE_8_CARDS = new HashSet<>();
-    private static final Set<String> VALUE_0_CARDS = new HashSet<>();
-    private static final Set<String> VALUE_10_CARDS = new HashSet<>();
-    private static final Set<String> VALUE_M10_CARDS = new HashSet<>();
+    public static final Set<String> VALUE_2_CARDS = new HashSet<>();
+    public static final Set<String> VALUE_3_CARDS = new HashSet<>();
+    public static final Set<String> VALUE_4_CARDS = new HashSet<>();
+    public static final Set<String> VALUE_5_CARDS = new HashSet<>();
+    public static final Set<String> VALUE_6_CARDS = new HashSet<>();
+    public static final Set<String> VALUE_7_CARDS = new HashSet<>();
+    public static final Set<String> VALUE_8_CARDS = new HashSet<>();
+    public static final Set<String> VALUE_0_CARDS = new HashSet<>();
+    public static final Set<String> VALUE_10_CARDS = new HashSet<>();
+    public static final Set<String> VALUE_M10_CARDS = new HashSet<>();
 
     static {
         // Cartas con valor 2
@@ -75,7 +76,6 @@ public class Card {
         VALUE_10_CARDS.add("36.png");
         VALUE_10_CARDS.add("49.png");
 
-
         VALUE_M10_CARDS.add("11.png");
         VALUE_M10_CARDS.add("22.png");
         VALUE_M10_CARDS.add("33.png");
@@ -93,57 +93,80 @@ public class Card {
     // Constructor
     public Card(String imageName) {
         this.imageName = imageName;
-        this.value = determineCardValue(imageName);  // Asignamos el valor de la carta
+        this.value = determineCardValue(imageName);
+        this.suit = determineCardSuit(imageName);
     }
 
-    // Método para determinar el valor de la carta basado en el nombre de la imagen
+    // Método para determinar el valor de la carta en función del nombre de la imagen
     private int determineCardValue(String imageName) {
-        if (VALUE_2_CARDS.contains(imageName)) {
+        if (imageName.equals("11.png") || imageName.equals("12.png") || imageName.equals("13.png")) {
+            return -10;
+        } else if (imageName.equals("2.png") || imageName.equals("15.png") || imageName.equals("28.png") || imageName.equals("41.png")) {
             return 2;
-        } else if (VALUE_3_CARDS.contains(imageName)) {
+        } else if (imageName.equals("3.png") || imageName.equals("16.png") || imageName.equals("29.png") || imageName.equals("42.png")) {
             return 3;
-        } else if (VALUE_4_CARDS.contains(imageName)) {
+        } else if (imageName.equals("4.png") || imageName.equals("17.png") || imageName.equals("30.png") || imageName.equals("43.png")) {
             return 4;
-        } else if (VALUE_5_CARDS.contains(imageName)) {
+        } else if (imageName.equals("5.png") || imageName.equals("18.png") || imageName.equals("31.png") || imageName.equals("44.png")) {
             return 5;
-        } else if (VALUE_6_CARDS.contains(imageName)) {
+        } else if (imageName.equals("6.png") || imageName.equals("19.png") || imageName.equals("32.png") || imageName.equals("45.png")) {
             return 6;
-        } else if (VALUE_7_CARDS.contains(imageName)) {
+        } else if (imageName.equals("7.png") || imageName.equals("20.png") || imageName.equals("33.png") || imageName.equals("46.png")) {
             return 7;
-        } else if (VALUE_8_CARDS.contains(imageName)) {
+        } else if (imageName.equals("8.png") || imageName.equals("21.png") || imageName.equals("34.png") || imageName.equals("47.png")) {
             return 8;
-        } else if (VALUE_0_CARDS.contains(imageName)) {
-            return 0;  // Valor 0 para las cartas 9, 22, 35 y 48
-        } else if (VALUE_10_CARDS.contains(imageName)) {
-            return 10;  // Valor 10 para las cartas 10, 23, 36 y 49
-        } else if (VALUE_M10_CARDS.contains(imageName)) {
-        return -10;
+        } else if (imageName.equals("9.png") || imageName.equals("22.png") || imageName.equals("35.png") || imageName.equals("48.png")) {
+            return 0;
+        } else if (imageName.equals("10.png") || imageName.equals("23.png") || imageName.equals("36.png") || imageName.equals("49.png")) {
+            return 10;
+        }
+        return 0; // Si no se encuentra, retornamos valor por defecto
     }
 
-        return 0;  // Valor predeterminado si no está en ninguna de las listas
+    // Método para determinar el palo de la carta en función del nombre de la imagen
+    private String determineCardSuit(String imageName) {
+        if (imageName.equals("1.png") || imageName.equals("2.png") || imageName.equals("3.png") || imageName.equals("4.png") || imageName.equals("5.png") || imageName.equals("6.png") ||
+                imageName.equals("7.png") || imageName.equals("8.png") || imageName.equals("9.png") || imageName.equals("10.png") || imageName.equals("11.png") || imageName.equals("12.png") || imageName.equals("13.png")) {
+            return "Pica";
+        } else if (imageName.equals("15.png") || imageName.equals("16.png") || imageName.equals("17.png") || imageName.equals("18.png") || imageName.equals("19.png") ||
+                imageName.equals("20.png") || imageName.equals("21.png") || imageName.equals("22.png") || imageName.equals("23.png") || imageName.equals("24.png") ||
+                imageName.equals("25.png") || imageName.equals("26.png")) {
+            return "Corazón";
+        } else if (imageName.equals("28.png") || imageName.equals("29.png") || imageName.equals("30.png") || imageName.equals("31.png") || imageName.equals("32.png") ||
+                imageName.equals("33.png") || imageName.equals("34.png") || imageName.equals("35.png") || imageName.equals("36.png") || imageName.equals("37.png") ||
+                imageName.equals("38.png") || imageName.equals("39.png")) {
+            return "Diamante";
+        } else if (imageName.equals("41.png") || imageName.equals("42.png") || imageName.equals("43.png") || imageName.equals("44.png") || imageName.equals("45.png") ||
+                imageName.equals("46.png") || imageName.equals("47.png") || imageName.equals("48.png") || imageName.equals("49.png") || imageName.equals("50.png") ||
+                imageName.equals("51.png") || imageName.equals("52.png")) {
+            return "Trebol";
+        }
+        return "Desconocido"; // En caso de que no se encuentre el palo
     }
 
-    // Getters y Setters
+    // Métodos getter
     public String getImageName() {
         return imageName;
-    }
-
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
     }
 
     public int getValue() {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public String getSuit() {
+        return suit;
     }
 
+    // Método toString
     @Override
     public String toString() {
         return "Card{" +
                 "imageName='" + imageName + '\'' +
                 ", value=" + value +
+                ", suit='" + suit + '\'' +
                 '}';
-    }}
+    }
+    public String getName() {
+        return imageName; // Devuelve el nombre de la imagen, que es el identificador único de la carta.
+    }
+}
