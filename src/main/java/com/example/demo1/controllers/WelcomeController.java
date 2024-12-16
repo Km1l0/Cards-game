@@ -1,7 +1,7 @@
 package com.example.demo1.controllers;
 
 import com.example.demo1.view.GameView;
-import javafx.event.ActionEvent; // Importación corregida
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -21,6 +21,9 @@ public class WelcomeController {
     @FXML
     private ListView<?> listView;
 
+    // Declarar gameStart como estático
+    public static boolean gameStart = false;  // Hacerlo estático
+
     @FXML
     void onHandleInstructionsButton(ActionEvent event) {
         // Agrega la lógica para el botón de instrucciones
@@ -28,12 +31,15 @@ public class WelcomeController {
 
     @FXML
     void selectNumberOfPlayers(MouseEvent event) {
-
+        // Lógica para seleccionar el número de jugadores
     }
 
     @FXML
-    void onHandlePlayButton(ActionEvent event)  {
+    void onHandlePlayButton(ActionEvent event) {
         try {
+            // Cambiar gameStart a true cuando se inicie el juego
+            gameStart = true;  // Ahora cambia gameStart a true cuando se presiona "Jugar"
+
             // Instancia de la ventana del juego y muestra GameView
             GameView gameView = GameView.getInstance();
             gameView.show(); // Mostrar la vista del juego
@@ -43,5 +49,3 @@ public class WelcomeController {
         }
     }
 }
-        // Agrega la lógica para el botón de jugar
-

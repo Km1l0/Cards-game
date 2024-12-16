@@ -62,7 +62,7 @@
                   <Image url="@images/53.png" />
                </image></ImageView>
          </children></VBox>
-      <Label layoutX="498.0" layoutY="91.0" text="SUMA ACTUAL:" />
+      <Label layoutX="427.0" layoutY="93.0" text="SUMA ACTUAL:" />
       <VBox layoutX="599.0" layoutY="209.0" prefHeight="214.0" prefWidth="174.0">
          <children>
             <ImageView fx:id="deckmesa" fitHeight="226.0" fitWidth="174.0" onMouseClicked="#DrawToHand" pickOnBounds="true" preserveRatio="true">
@@ -72,6 +72,32 @@
             </ImageView>
          </children>
       </VBox>
-      <Label fx:id="currentValue" alignment="CENTER" layoutX="625.0" layoutY="74.0" prefHeight="54.0" prefWidth="121.0" text="0" textAlignment="CENTER" />
+      <Label fx:id="currentValue" alignment="CENTER" layoutX="514.0" layoutY="75.0" prefHeight="54.0" prefWidth="121.0" text="0" textAlignment="CENTER" />
+      <Label layoutX="667.0" layoutY="94.0" text="¨TURNO:" />
+      <Label fx:id="turn" alignment="CENTER" layoutX="735.0" layoutY="76.0" prefHeight="54.0" prefWidth="121.0" text="0" textAlignment="CENTER" />
+      <VBox layoutX="1095.0" layoutY="274.0" prefHeight="322.0" prefWidth="0.0">
+         <children>
+            <ImageView fitHeight="143.0" fitWidth="47.0" onMouseClicked="#DrawToHand" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/b2fv.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="deckmesa1" fitHeight="68.0" fitWidth="46.0" onMouseClicked="#DrawToHand" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/b2fv.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="deckmesa11" fitHeight="107.0" fitWidth="50.0" onMouseClicked="#DrawToHand" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/b2fv.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="deckmesa12" fitHeight="108.0" fitWidth="50.0" onMouseClicked="#DrawToHand" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/b2fv.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
    </children>
 </Pane>
