@@ -32,6 +32,7 @@ public class Machine implements Runnable {
         machineHand.add(card);
     }
 
+
     // Método para obtener una nueva carta para la máquina
     private void getNewCardForMachine() {
         try {
@@ -49,7 +50,7 @@ public class Machine implements Runnable {
             int cardValue = getCardValue(cardName);
 
             // Crear la carta con su nombre y valor
-            Card newCard = new Card("2.png");
+            Card newCard = new Card(cardName); // Usamos el nombre real de la carta
             machineHand.add(newCard);
             // Agregar la carta a la mano de la máquina
             addCardToMachineHand(newCard);
@@ -67,13 +68,15 @@ public class Machine implements Runnable {
             // Se actualiza el ImageView del deck de la mesa con la carta de la máquina
             gameController.updateDeck(newCardImage); // Usa este método para actualizar el ImageView
 
+            // Ahora, invocamos la función para que la máquina obtenga una nueva carta
+            // Aquí la invocamos para obtener una carta adicional.
+
             // Aumenta el turno
             turnNumber++;
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
     // Método para obtener el valor de la carta basándose en su nombre
     private int getCardValue(String cardName) {
         if (Card.VALUE_2_CARDS.contains(cardName)) {
@@ -111,6 +114,8 @@ public class Machine implements Runnable {
 
                 // La máquina juega su carta
                 onMachinePlayCard();
+                getNewCardForMachine();  // Llamamos al método nuevamente para obtener una nueva carta.
+
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -144,5 +149,7 @@ public class Machine implements Runnable {
 
         // Aumentar el turno
         turnNumber++;
+        getNewCardForMachine();
+        gameController.updateTotalValue(getCardValue(machineCard.getName()));
     }
 }

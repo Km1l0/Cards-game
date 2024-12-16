@@ -99,7 +99,7 @@ public class Card {
 
     // Método para determinar el valor de la carta en función del nombre de la imagen
     private int determineCardValue(String imageName) {
-        if (imageName.equals("11.png") || imageName.equals("12.png") || imageName.equals("13.png")) {
+        if (imageName.equals("11.png") || imageName.equals("12.png") || imageName.equals("13.png") || imageName.equals("24.png") || imageName.equals("25.png") || imageName.equals("26.png")|| imageName.equals("37.png") || imageName.equals("38.png") || imageName.equals("39.png")|| imageName.equals("50.png") || imageName.equals("51.png") || imageName.equals("52.png")) {
             return -10;
         } else if (imageName.equals("2.png") || imageName.equals("15.png") || imageName.equals("28.png") || imageName.equals("41.png")) {
             return 2;

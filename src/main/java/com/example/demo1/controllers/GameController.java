@@ -62,6 +62,12 @@ public class GameController {
         machine.onMachinePlayCard();
     }
 
+    public void updateTotalValue(int value) {
+        totalValue += value; // Suma o resta el valor a totalValue
+        int newTotalValue = totalValue;  // Se usa totalValue ya que es la suma acumulada
+        currentValue.setText(String.valueOf(newTotalValue)); // Imprime el nuevo total para depuración
+    }
+
     public void updateDeck(Image newCardImage) {
         deck.setImage(newCardImage);
     }
@@ -69,7 +75,7 @@ public class GameController {
     private ImageView selectedCard = null;
     private Card selectedCardModel = null;
     public int turnNumber = 0;
-    private int totalValue = 1;
+    private int totalValue = 0;
 
     // Contenedor para las cartas de la mano de la máquina
     private Set<Card> machineHand = new HashSet<>();
